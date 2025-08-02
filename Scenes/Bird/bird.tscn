@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://enk5hwohqlct"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://5ciekalq06j4" path="res://Resources/PhysicsMaterials/bird_material.tres" id="1_20rfr"]
+[ext_resource type="Texture2D" uid="uid://6sfta38flpvp" path="res://assets/player/parrot.png" id="1_bdvsx"]
+[ext_resource type="Script" uid="uid://bsdr4eoh8ismw" path="res://Scenes/Bird/bird.gd" id="2_3subn"]
+[ext_resource type="Texture2D" uid="uid://dcfqrhcot5l1" path="res://assets/items/arrow.png" id="3_bgqvc"]
+[ext_resource type="AudioStream" uid="uid://c3c6waf620ddt" path="res://assets/audio/stretch2.ogg" id="4_67xgt"]
+[ext_resource type="AudioStream" uid="uid://bcpv3gvjc0oae" path="res://assets/audio/kick_wood.ogg" id="5_3subn"]
+[ext_resource type="AudioStream" uid="uid://bhvlupaajp3ap" path="res://assets/audio/catapult.ogg" id="6_uf67x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_20rfr"]
+radius = 19.0
+
+[node name="Bird" type="RigidBody2D"]
+input_pickable = true
+physics_material_override = ExtResource("1_20rfr")
+freeze = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("2_3subn")
+
+[node name="BirdSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_bdvsx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_20rfr")
+
+[node name="debug_label" type="Label" parent="."]
+visible = false
+offset_top = -99.0
+offset_right = 385.0
+offset_bottom = 303.0
+scale = Vector2(0.198511, 0.177242)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "T
+T
+T"
+
+[node name="ArrowSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_bgqvc")
+offset = Vector2(150, 0)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-1, -1, 2, 2)
+
+[node name="StretchSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_67xgt")
+
+[node name="Kick_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_3subn")
+
+[node name="LaunchSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_uf67x")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]

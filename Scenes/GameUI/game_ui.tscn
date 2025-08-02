@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcoi0oq2jt5u7"]
+
+[ext_resource type="LabelSettings" uid="uid://bc8m3mqrgawnl" path="res://Resources/Text/white_label_25.tres" id="1_s3w5c"]
+[ext_resource type="Script" uid="uid://i6012rel4krf" path="res://Scenes/GameUI/game_ui.gd" id="1_u0r4i"]
+[ext_resource type="LabelSettings" uid="uid://bjgnqtv1t5ijm" path="res://Resources/Text/blue_label_69.tres" id="2_smc31"]
+[ext_resource type="LabelSettings" uid="uid://bi02274cj6y8a" path="res://Resources/Text/white_label_36.tres" id="3_0u7gi"]
+[ext_resource type="AudioStream" uid="uid://ivjc2a7g7awp" path="res://assets/audio/jazzyfrenchy.mp3" id="4_0u7gi"]
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_u0r4i")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Level"
+label_settings = ExtResource("1_s3w5c")
+
+[node name="LevelNum" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "X"
+label_settings = ExtResource("1_s3w5c")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AttemptsLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Attempt"
+label_settings = ExtResource("1_s3w5c")
+
+[node name="NumAttempts" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("1_s3w5c")
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="VBoxGameOver" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+visible = false
+layout_mode = 2
+
+[node name="LevelCompleteLabel" type="Label" parent="MarginContainer/CenterContainer/VBoxGameOver"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "Level Complete!"
+label_settings = ExtResource("2_smc31")
+
+[node name="PressSpaceLabel" type="Label" parent="MarginContainer/CenterContainer/VBoxGameOver"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "Press Space"
+label_settings = ExtResource("3_0u7gi")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_0u7gi")
+volume_db = -20.0
+parameters/looping = true
